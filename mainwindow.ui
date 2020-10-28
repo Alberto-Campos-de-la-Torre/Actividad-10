@@ -371,6 +371,16 @@
         <string>Capturar Final</string>
        </property>
       </widget>
+      <widget class="QPlainTextEdit" name="NumAct">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>20</y>
+         <width>171</width>
+         <height>41</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
     </item>
    </layout>

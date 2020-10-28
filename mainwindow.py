@@ -16,6 +16,13 @@ class MainWindow(QMainWindow):
         self.ui.finalcap.clicked.connect(self.click_agregarfinal)
         self.ui.Iniciocap.clicked.connect(self.click_agregarinicio)      
         self.ui.Mostrar.clicked.connect(self.click_mostrar)
+        self.ui.OrigenX.valueChanged.connect(self.setValue)
+        self.ui.OrigenY.valueChanged.connect(self.setValue)
+        self.ui.DestinoX.valueChanged.connect(self.setValue)
+        self.ui.DestinoY.valueChanged.connect(self.setValue)
+        self.ui.Verde.valueChanged.connect(self.setValue)
+        self.ui.Rojo.valueChanged.connect(self.setValue)
+        self.ui.Azul.valueChanged.connect(self.setValue)
 
     
 
@@ -60,3 +67,8 @@ class MainWindow(QMainWindow):
        # self.particulas.mostrar()
        self.ui.salida.clear()
        self.ui.salida.insertPlainText(str(self.particulas))
+    
+    @Slot()
+    def setValue(self,valor):
+       self.ui.NumAct.clear()
+       self.ui.NumAct.insertPlainText(str(valor))

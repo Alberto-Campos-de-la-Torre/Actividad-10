@@ -119,6 +119,9 @@ class Ui_MainWindow(object):
         self.finalcap = QPushButton(self.groupBox)
         self.finalcap.setObjectName(u"finalcap")
         self.finalcap.setGeometry(QRect(200, 350, 151, 41))
+        self.NumAct = QPlainTextEdit(self.groupBox)
+        self.NumAct.setObjectName(u"NumAct")
+        self.NumAct.setGeometry(QRect(200, 20, 171, 41))
 
         self.gridLayout_2.addWidget(self.groupBox, 0, 0, 1, 1)
 

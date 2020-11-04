@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QMainWindow
+from PySide2.QtWidgets import QMainWindow, QFileDialog,QMessageBox
 from PySide2.QtCore import Slot
 from ui_mainwindow import Ui_MainWindow
 from particulas import Particulas
@@ -24,11 +24,58 @@ class MainWindow(QMainWindow):
         self.ui.Rojo.valueChanged.connect(self.setValue)
         self.ui.Azul.valueChanged.connect(self.setValue)
 
-    
+        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
+        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
+        
+
+    @Slot()
+    def action_abrir_archivo(self):
+       # print('Abrir Archivo')
+        ubicacion = QFileDialog.getOpenFileName(
+           self,
+           'Abrir Archivo',
+           '.',
+           'JSON (*.json)'
+        )[0]
+        if self.particulas.abrir(ubicacion):
+            QMessageBox.information(
+                self,
+                "Exito",
+                "Se abrió el archivo " + ubicacion
+            )
+        else:
+            QMessageBox.critical(
+                self,
+                "Error",
+                "Error al abrir el archivo " + ubicacion
+            )
+
+    @Slot()
+    def action_guardar_archivo(self):
+        #print('Guardar Archivo')
+        ubicacion = QFileDialog.getSaveFileName(
+            self,
+            'Guardar Archivo',
+            '.',
+            'JSON (*.json)'
+        )[0]
+        print(ubicacion)
+        if self.particulas.guardar(ubicacion):
+            QMessageBox.information(
+                self,
+                "Exito",
+                "Se pudo crear el archivo " + ubicacion
+            )
+        else:
+            QMessageBox.critical(
+               self,
+               "Error",
+               "No se pudo crear el archivo " + ubicacion
+            )
 
     @Slot()
     def click_agregarfinal(self):
-        IDD = self.ui.ID.value()
+        Id = self.ui.ID.value()
         Ox = self.ui.OrigenX.value()   
         Oy = self.ui.OrigenY.value() 
         Dx = self.ui.DestinoX.value()
@@ -38,7 +85,7 @@ class MainWindow(QMainWindow):
         Blue = self.ui.Azul.value()
         Green = self.ui.Verde.value()   
 
-        particula = Particula(IDD,Ox,Oy,Dx,Dy,Vel,Red,Blue,Green)
+        particula = Particula(Id,Ox,Oy,Dx,Dy,Vel,Red,Blue,Green)
         self.particulas.agregar_final(particula)
         
         #print(particula)
@@ -46,7 +93,7 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def click_agregarinicio(self):
-        IDD = self.ui.ID.value()
+        Id = self.ui.ID.value()
         Ox = self.ui.OrigenX.value()   
         Oy = self.ui.OrigenY.value() 
         Dx = self.ui.DestinoX.value()
@@ -56,7 +103,7 @@ class MainWindow(QMainWindow):
         Blue = self.ui.Azul.value()
         Green = self.ui.Verde.value()
 
-        particula = Particula(IDD,Ox,Oy,Dx,Dy,Vel,Red,Blue,Green)
+        particula = Particula(Id,Ox,Oy,Dx,Dy,Vel,Red,Blue,Green)
         self.particulas.agregar_inicio(particula)
 
         #print(IDD,Ox,Oy,Dx,Dy,Vel,Red,Blue,Green)
